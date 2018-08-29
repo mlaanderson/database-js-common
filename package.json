@@ -1,0 +1,20 @@
+{
+  "name": "database-js-common",
+  "version": "1.0.0",
+  "description": "database-js common code",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlaanderson/database-js-common.git"
+  },
+  "keywords": [
+    "database-js"
+  ],
+  "author": "Michael Anderson <michael@anderson-clan.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mlaanderson/database-js-common/issues"
+  },
+  "homepage": "https://github.com/mlaanderson/database-js-common#readme",
+  "devDependencies": {}
+}
