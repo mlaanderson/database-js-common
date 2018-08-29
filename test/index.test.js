@@ -9,6 +9,11 @@ describe('Test parseConnectionParams method', function () {
         assert.equal(result, testedParamString)
     });
 
+    it('should return empty object', function () {
+        const result = parseConnectionParams('', true);
+        assert.deepEqual(result, {})
+    });
+
     describe('Test parsed values', function () {
         const result = parseConnectionParams(testedParamString, true);
 
