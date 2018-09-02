@@ -4,9 +4,30 @@ describe('Test parseConnectionParams method', function () {
     const parseConnectionParams = require('../.').parseConnectionParams;
     const testedParamString = 'booleanTrue=true&booleanFalse=false&string=foo&integer=35&float=35.8';
 
-    it('should be not processed by default', function () {
+    describe('Test default not parsed values', function () {
         const result = parseConnectionParams(testedParamString);
-        assert.equal(result, testedParamString)
+
+        it('should be string true', function () {
+            assert.equal(result.booleanTrue, 'true')
+        });
+
+        it('should be string false', function () {
+            assert.equal(result.booleanFalse, 'false')
+        });
+
+
+        it('should be string', function () {
+            assert.equal(result.string, 'foo')
+        });
+
+
+        it('should be string number', function () {
+            assert.equal(result.integer, '35')
+        });
+
+        it('should be string float', function () {
+            assert.equal(result.float, '35.8')
+        });
     });
 
     it('should return empty object', function () {
@@ -22,23 +43,23 @@ describe('Test parseConnectionParams method', function () {
         });
 
         it('should be boolean true', function () {
-            assert.ok(result.booleanTrue === true, 'boolean true not parsed')
+            assert.equal(result.booleanTrue, true)
         });
 
         it('should be boolean false', function () {
-            assert.ok(result.booleanFalse === false, 'boolean false not parsed')
+            assert.equal(result.booleanFalse, false)
         });
 
         it('should be string', function () {
-            assert.ok(typeof result.string === 'string', 'string not parsed')
+            assert.equal(result.string, 'foo')
         });
 
         it('should be integer', function () {
-            assert.ok(result.integer % 1 === 0, 'integer not parsed')
+            assert.equal(result.integer, 35)
         });
 
         it('should be float', function () {
-            assert.ok(result.float % 1 !== 0, 'float not parsed')
+            assert.equal(result.float, 35.8)
         });
     })
 });

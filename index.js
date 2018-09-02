@@ -1,24 +1,25 @@
 function parseConnectionParams(paramstring, parseValues = false) {
-    if (parseValues) {
-        const params = {};
-        const numberRegex = /^[-+]?(\d+\.)?\d+(E[-+]?\d+)?$/i;
+    const params = {};
+    const numberRegex = /^[-+]?(\d+\.)?\d+(E[-+]?\d+)?$/i;
 
-        if (paramstring) {
-            paramstring.split('&').map(s => {
-                let [key, val] = s.split('=');
-                const lowerCasedValue = val.toLowerCase();
-                if (lowerCasedValue === 'true') val = true;
-                else if (lowerCasedValue === 'false') val = false;
-                else if (numberRegex.test(val)) val = parseFloat(val);
+    if (paramstring) {
+        const valuesPreprocessor = parseValues ?
+            (value) => {
+                const lowerCasedValue = value.toLowerCase();
+                if (lowerCasedValue === 'true') value = true;
+                else if (lowerCasedValue === 'false') value = false;
+                else if (numberRegex.test(value)) value = parseFloat(value);
+                return value;
+            } :
+            (value) => value;
 
-                params[key] = val;
-            });
-        }
-
-        return params;
-    } else {
-        return paramstring;
+        paramstring.split('&').map(s => {
+            let [key, val] = s.split('=');
+            params[key] = valuesPreprocessor(val);
+        });
     }
+
+    return params;
 }
 
 module.exports = {
